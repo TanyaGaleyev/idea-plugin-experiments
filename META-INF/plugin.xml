@@ -1,0 +1,24 @@
+<idea-plugin version="2">
+  <id>org.ivan.intellij.static.import.action</id>
+  <name>Plugin display name here</name>
+  <version>1.0</version>
+  <vendor email="pav401@mail.ru" url="http://www.yourcompany.com">Ivan</vendor>
+
+  <description><![CDATA[
+
+    ]]></description>
+
+  <idea-version since-build="131"/>
+
+  <extensions defaultExtensionNs="com.intellij">
+  </extensions>
+
+  <actions>
+    <action id="CopyLineUpAction" class="org.ivan.intellij.staticimport.StaticImportAction"
+            text="Static import"
+            description="Static import">
+      <add-to-group group-id="EditorActions" anchor="last"/>
+    </action>
+  </actions>
+
+</idea-plugin>
