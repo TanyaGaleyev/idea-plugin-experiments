@@ -1,12 +1,11 @@
 <idea-plugin version="2">
   <id>org.ivan.intellij.static.import.action</id>
-  <name>Plugin display name here</name>
+  <name>Static import action</name>
   <version>1.0</version>
-  <vendor email="pav401@mail.ru" url="http://www.yourcompany.com">Ivan</vendor>
 
-  <description><![CDATA[
-
-    ]]></description>
+  <description>
+    This plugin allow you to import members statically as action. Shortcut can be bound.
+  </description>
 
   <idea-version since-build="131"/>
 
