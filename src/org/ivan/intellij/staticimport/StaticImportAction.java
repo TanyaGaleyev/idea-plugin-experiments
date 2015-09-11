@@ -48,7 +48,16 @@ public class StaticImportAction extends EditorAction {
             if (element == null) {
                 return;
             }
+            if (!isAvailable(element)) {
+                return;
+            }
             invoke(file, element);
+        }
+
+        private boolean isAvailable(@NotNull PsiElement element) {
+            ImportAvailability availability = getStaticImportClass(element);
+            return availability != null
+                    && (availability.resolved instanceof PsiClass || element.getContainingFile() instanceof PsiJavaFile);
         }
     }
 
@@ -158,20 +167,6 @@ public class StaticImportAction extends EditorAction {
             }
         }
         return aClass;
-    }
-
-    public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-        // TODO
-        ImportAvailability availability = getStaticImportClass(element);
-        if (availability != null) {
-            if (availability.resolved instanceof PsiClass) {
-//                setText(CodeInsightBundle.message("intention.add.single.member.import.text", availability.qName));
-            } else {
-                if (!(element.getContainingFile() instanceof PsiJavaFile)) return false;
-//                setText(CodeInsightBundle.message("intention.add.single.member.static.import.text", availability.qName));
-            }
-        }
-        return availability != null;
     }
 
     public static void invoke(PsiFile file, final PsiElement element) {
