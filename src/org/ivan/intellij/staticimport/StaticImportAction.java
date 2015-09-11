@@ -43,17 +43,38 @@ public class StaticImportAction extends EditorAction {
             if (file == null) {
                 return;
             }
-            PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+            PsiElement element = getElementIfApplicable(editor, file);
             if (element == null) {
-                return;
-            }
-            if (!isAvailable(element)) {
                 return;
             }
             invoke(file, element);
         }
 
-        private boolean isAvailable(@NotNull PsiElement element) {
+        @Nullable
+        private static PsiElement getElementIfApplicable(@NotNull Editor editor, @NotNull PsiFile file) {
+            PsiElement elementToTheRight = getElementToTheRight(editor, file);
+            if (elementToTheRight != null && isApplicable(elementToTheRight)) {
+                return elementToTheRight;
+            }
+
+            PsiElement elementToTheLeft = getElementToTheLeft(editor, file);
+            if (elementToTheLeft != null && isApplicable(elementToTheLeft)) {
+                return elementToTheLeft;
+            }
+            return null;
+        }
+
+        @Nullable
+        private static PsiElement getElementToTheRight(@NotNull Editor editor, @NotNull PsiFile file) {
+            return file.findElementAt(editor.getCaretModel().getOffset());
+        }
+
+        @Nullable
+        private static PsiElement getElementToTheLeft(@NotNull Editor editor, @NotNull PsiFile file) {
+            return file.findElementAt(editor.getCaretModel().getOffset() - 1);
+        }
+
+        private static boolean isApplicable(@NotNull PsiElement element) {
             ImportAvailability availability = getStaticImportClass(element);
             return availability != null
                     && (availability.resolved instanceof PsiClass || element.getContainingFile() instanceof PsiJavaFile);
