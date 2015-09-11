@@ -13,10 +13,13 @@
   </extensions>
 
   <actions>
-    <action id="CopyLineUpAction" class="org.ivan.intellij.staticimport.StaticImportAction"
+    <action id="StaticImportAction" class="org.ivan.intellij.staticimport.StaticImportAction"
             text="Static import"
             description="Static import">
       <add-to-group group-id="EditorActions" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="control shift S"/>
+      <keyboard-shortcut keymap="Mac OS X" first-keystroke="control shift S"/>
+      <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="control shift S"/>
     </action>
   </actions>
 
