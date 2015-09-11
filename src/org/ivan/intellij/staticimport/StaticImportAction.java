@@ -24,9 +24,9 @@ import org.jetbrains.annotations.Nullable;
  * Created by tanya on 08.09.15.
  */
 public class StaticImportAction extends EditorAction {
-    public StaticImportAction() {
-        super(new StaticImportHandler());
-    }
+
+    private static final Logger LOG = Logger.getInstance("#org.ivan.intellij.staticimport.StaticImportAction");
+    private static final Key<PsiElement> TEMP_REFERENT_USER_DATA = new Key<PsiElement>("TEMP_REFERENT_USER_DATA");
 
     private static class StaticImportHandler extends EditorWriteActionHandler {
         private StaticImportHandler() {
@@ -52,8 +52,9 @@ public class StaticImportAction extends EditorAction {
         }
     }
 
-    private static final Logger LOG = Logger.getInstance("#org.ivan.intellij.staticimport.StaticImportAction");
-    private static final Key<PsiElement> TEMP_REFERENT_USER_DATA = new Key<PsiElement>("TEMP_REFERENT_USER_DATA");
+    public StaticImportAction() {
+        super(new StaticImportHandler());
+    }
 
     public static class ImportAvailability {
         private final String qName;
